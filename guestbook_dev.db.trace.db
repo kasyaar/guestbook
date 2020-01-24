@@ -1,3 +1,37 @@
 2020-01-23 22:29:52 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLException: Table "SCHEMA_MIGRATIONS" not found; SQL statement:
 SELECT 1 FROM schema_migrations [42102-197]
+2020-01-24 11:05:03 database: flush
+org.h2.message.DbException: General error: "java.lang.IllegalStateException: Reading from nio:/home/kasyaar/shared/workspace/guestbook/guestbook_dev.db.mv.db failed; file length -1 read length 1024 at 8192 [1.4.197/1]" [50000-197]
+	at org.h2.message.DbException.get(DbException.java:168)
+	at org.h2.message.DbException.convert(DbException.java:307)
+	at org.h2.mvstore.db.MVTableEngine$1.uncaughtException(MVTableEngine.java:95)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:2506)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2499)
+	at org.h2.mvstore.MVStore$BackgroundWriterThread.run(MVStore.java:2713)
+Caused by: org.h2.jdbc.JdbcSQLException: General error: "java.lang.IllegalStateException: Reading from nio:/home/kasyaar/shared/workspace/guestbook/guestbook_dev.db.mv.db failed; file length -1 read length 1024 at 8192 [1.4.197/1]" [50000-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	... 6 more
+Caused by: java.lang.IllegalStateException: Reading from nio:/home/kasyaar/shared/workspace/guestbook/guestbook_dev.db.mv.db failed; file length -1 read length 1024 at 8192 [1.4.197/1]
+	at org.h2.mvstore.DataUtils.newIllegalStateException(DataUtils.java:870)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:417)
+	at org.h2.mvstore.FileStore.readFully(FileStore.java:98)
+	at org.h2.mvstore.MVStore.readChunkHeader(MVStore.java:1556)
+	at org.h2.mvstore.MVStore.getMetaMap(MVStore.java:524)
+	at org.h2.mvstore.MVStore.openMapVersion(MVStore.java:413)
+	at org.h2.mvstore.MVMap.openVersion(MVMap.java:1090)
+	at org.h2.mvstore.MVMap.rewrite(MVMap.java:737)
+	at org.h2.mvstore.MVStore.compactRewrite(MVStore.java:1902)
+	at org.h2.mvstore.MVStore.compact(MVStore.java:1784)
+	at org.h2.mvstore.MVStore.writeInBackground(MVStore.java:2495)
+	... 1 more
+Caused by: java.io.IOException: Protocol error
+	at java.base/sun.nio.ch.FileDispatcherImpl.pread0(Native Method)
+	at java.base/sun.nio.ch.FileDispatcherImpl.pread(FileDispatcherImpl.java:54)
+	at java.base/sun.nio.ch.IOUtil.readIntoNativeBuffer(IOUtil.java:274)
+	at java.base/sun.nio.ch.IOUtil.read(IOUtil.java:245)
+	at java.base/sun.nio.ch.FileChannelImpl.readInternal(FileChannelImpl.java:811)
+	at java.base/sun.nio.ch.FileChannelImpl.read(FileChannelImpl.java:796)
+	at org.h2.store.fs.FileNio.read(FilePathNio.java:74)
+	at org.h2.mvstore.DataUtils.readFully(DataUtils.java:403)
+	... 10 more
